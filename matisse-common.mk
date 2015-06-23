@@ -22,7 +22,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
 
 # Proprietary files
-$(call inherit-product, vendor/samsung/matissewifi/matissewifi-vendor.mk)
+$(call inherit-product, vendor/samsung/matisse-common/matisse-common-vendor.mk)
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
@@ -73,14 +73,47 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
     $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
 
-ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.secure=0 \
-    ro.adb.secure=0
-
 # Radio (needed for audio controls even on wifi-only)
 PRODUCT_PACKAGES += \
     libsecril-client \
     libsecril-client-sap
+
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.secure=0 \
+    ro.adb.secure=0
+
+# Common build.props
+PRODUCT_PROPERTY_OVERRIDES += \
+	audio.offload.buffer.size.kb=32 \
+	audio.offload.gapless.enabled=false \
+	audio.offload.multiple.enabled=false \
+	av.offload.enable=false \
+	av.streaming.offload.enable=false \
+	media.aac_51_output_enabled=true \
+	mm.enable.qcom_parser=3314291 \
+	mm.enable.smoothstreaming=true \
+	ro.qc.sdk.audio.fluencetype=none \
+	use.voice.path.for.pcm.voip=false \
+	ro.bluetooth.hfp.ver=1.6 \
+	ro.qualcomm.bt.hci_transport=smd \
+	camera2.portability.force_api=1 \
+	debug.composition.type=c2d \
+	ro.opengles.version=196608 \
+	ro.sf.lcd_density=160 \
+	persist.gps.qc_nlp_in_use=1 \
+	ro.gps.agps_provider=1 \
+	ro.qc.sdk.izat.premium_enabled=0 \
+	ro.qc.sdk.izat.service_mask=0x0 \
+	persist.timed.enable=true \
+	ro.qualcomm.cabl=0 \
+	ro.vendor.extension_library=/system/vendor/lib/libqc-opt.so \
+	persist.data.netmgrd.qos.enable=false \
+	persist.radio.add_power_save=1 \
+	ro.use_data_netmgrd=false \
+	ro.qc.sdk.gestures.camera=false \
+	ro.qc.sdk.camera.facialproc=false \
+	ro.qc.sdk.sensors.gestures=true \
+	wifi.interface=wlan0
 
 # Inherit from qcom-common
 $(call inherit-product, device/samsung/msm8226-common/msm8226.mk)
