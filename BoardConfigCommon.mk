@@ -15,6 +15,11 @@
 # Inherit from msm8226-common
 -include device/samsung/msm8226-common/BoardConfigCommon.mk
 
+# Pre-L Compatibility
+COMMON_GLOBAL_CFLAGS += \
+    -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL \
+    -DENABLE_NON_PIE_SUPPORT
+
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/matisse-common/bluetooth
 
