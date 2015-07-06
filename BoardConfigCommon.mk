@@ -42,15 +42,19 @@ TARGET_USERIMAGES_USE_EXT4 := true
 # Recovery
 TARGET_RECOVERY_FSTAB := device/samsung/matisse-common/rootdir/fstab.qcom
 
-# Compiler flags
-TARGET_GCC_VERSION_EXP := 4.9
-TARGET_USE_PIPE := true
-USE_O3_OPTIMIZATIONS := true
-SUPPRES_UNUSED_WARNING := true
-KRAIT_TUNINGS := true
-ENABLE_GCCONLY := true
-GRAPHITE_OPTS := true
-STRICT_ALIASING := true
-BOOT_ZIP_OUT_FILE := SlimKernel-$(TARGET_DEVICE)-$(PLATFORM_VERSION)-$(shell date +"%Y%m%d")
+
+# BlissPop Configs
+TARGET_TC_ROM := 4.9-sm
+TARGET_TC_KERNEL := 4.9-sm
+BLISSIFY := true
+BLISS_O3 := true
+BLISS_STRICT := true
+BLISS_GRAPHITE := true
+BLISS_KRAIT := true
+BLISS_PIPE := true
+TARGET_GCC_VERSION_EXP := $(TARGET_TC_ROM)
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := $(TARGET_TC_KERNEL)
+
+-include vendor/bliss/config/sm.mk
 
 
